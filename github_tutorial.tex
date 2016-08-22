@@ -16,10 +16,14 @@
 \usepackage{url}
 \usepackage{placeins}
 
+%%% Listing github codes
+\usepackage{listings}
+\usepackage{xcolor}
+
 
 %%% Custom sectioning
 \usepackage{sectsty}
-\allsectionsfont{\centering \normalfont\scshape}
+\allsectionsfont{\small\scshape}
 
 %%% Custom headers/footers (fancyhdr package)
 \usepackage{fancyhdr}
@@ -45,7 +49,7 @@
 		\usefont{OT1}{bch}{b}{n}
 		\normalfont \normalsize \textsc{Github} \\ [25pt]
 		\horrule{0.5pt} \\[0.4cm]
-		\Large A mini tutorial \\
+		\Large A MINI TUTORIAL \\
 		\horrule{2pt} \\[0.5cm]
 }
 \author{
@@ -60,5 +64,81 @@
 %\usepackage{Sweave}
 \begin{document}
 \maketitle
+%%% Set github code environment
+
+\lstdefinestyle{gitnumber}{
+	numbers=left,
+	numberstyle=\tiny,
+	backgroundcolor=\color{gray!15},
+	upquote=true,
+	showstringspaces=false,
+	morecomment=[l][\color{blue!80}\ttfamily]{https://},
+	morecomment=[l][\color{blue!80}\ttfamily]{http://}	
+}
+
+\lstdefinestyle{git}{
+	backgroundcolor=\color{gray!15},
+	upquote=true,
+	showstringspaces=false,
+	morecomment=[l][\color{blue!80}\ttfamily]{https://},
+	morecomment=[l][\color{blue!80}\ttfamily]{http://}	
+}
+
+\lstset{style=git}
+
+\section*{Configure the User Settings}
+\begin{enumerate}
+\item The commands that are used to configure
+\begin{itemize}
+\item System wide configuration
+\begin{lstlisting}
+git config --system
+\end{lstlisting}
+\item User based configuration
+\begin{lstlisting}
+git config --global
+\end{lstlisting}
+\item Project based configuration
+\begin{lstlisting}
+git config
+\end{lstlisting}
+\end{itemize}
+\item The variables that we can configure are
+\begin{itemize}
+\item User name
+\begin{lstlisting}
+git config --global user.name "Your name"
+\end{lstlisting}
+\item User email address
+\begin{lstlisting}
+git config --global user.emal "Your email address"
+\end{lstlisting}
+\item Custom editor
+\begin{lstlisting}
+git config --global core.editor "Editor"
+\end{lstlisting}
+\item Git bash colored user interface
+\begin{lstlisting}
+git config --global color.ui true
+\end{lstlisting}
+\end{itemize}
+\item To view the configurations
+\begin{lstlisting}
+git config --list
+\end{lstlisting}
+\end{enumerate}
+
+\section*{Create Repository on Github}
+\begin{enumerate}
+\item Go to \url{https://github.com/} and create a repository ``xyz''.
+\item Once created click on clone or download button and get a url link to the project which will look like \url{https://github.com/yourname/xyz.git}.
+\item Open the github bash in folder where you want the project and use the following command to clone the project.
+\begin{lstlisting}
+git clone https://github.com/yourname/xyz.git
+\end{lstlisting}
+\item This will create a folder called ``xyz'' in the directory you used the command.
+
+
+\end{enumerate}
 
 \end{document}
