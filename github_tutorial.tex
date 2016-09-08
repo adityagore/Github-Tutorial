@@ -29,7 +29,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancyplain}
 \fancyhead{}											% No page header
-\fancyfoot[L]{}											% Empty 
+\fancyfoot[L]{\texttt{git help} for help}											% Empty 
 \fancyfoot[C]{}											% Empty
 \fancyfoot[R]{\thepage}									% Pagenumbering
 \renewcommand{\headrulewidth}{0pt}			% Remove header underlines
@@ -86,6 +86,8 @@
 
 \lstset{style=git}
 
+
+
 \section*{Configure the User Settings}
 \begin{enumerate}
 \item The commands that are used to configure
@@ -128,6 +130,15 @@ git config --list
 \end{lstlisting}
 \end{enumerate}
 
+\section*{Create Repository w/o Github}
+\begin{enumerate}
+\item If you want to start off with the project without creating a repository on Github then create the directory called ``xyz'' where you want to start the project and then use git bash to navigate to the folder and once in there use the command
+\begin{lstlisting}
+git init
+\end{lstlisting}
+This command will start tracking any changes that are made in the ``xyz'' folder from here on.
+\end{enumerate}
+
 \section*{Create Repository on Github}
 \begin{enumerate}
 \item Go to \url{https://github.com/} and create a repository ``xyz''.
@@ -137,8 +148,85 @@ git config --list
 git clone https://github.com/yourname/xyz.git
 \end{lstlisting}
 \item This will create a folder called ``xyz'' in the directory you used the command.
+\end{enumerate}
 
+\section*{Making commits}
+\begin{enumerate}
+\item To add all the changes to the ``staged'' index use the command
+\begin{lstlisting}
+git add .
+\end{lstlisting}
+\item To commit the changes to the same ``branch''
+\begin{lstlisting}
+git commit -m "Write down the message about the commit"
+\end{lstlisting}
+\item To remove a deleted file (working directory) from the repository
+\begin{lstlisting}
+git rm file_name
+\end{lstlisting}
+\item To move or rename a file
+\begin{lstlisting}
+git mv firstname secondname
+\end{lstlisting}
+\item To add and commit at the same time
+\begin{lstlisting}
+git commit -am "write the message here"
+\end{lstlisting}
+\end{enumerate}
 
+\section*{Viewing commits and logs}
+\begin{enumerate}
+\item To view commits made so far
+\begin{lstlisting}
+git log
+\end{lstlisting}
+\item To view past $3$ commits
+\begin{lstlisting}
+git log -n 3
+\end{lstlisting}
+\item We can use time filter to view the commits
+\begin{lstlisting}
+git log --since=2016-09-15 --until==2016-09-22
+\end{lstlisting}
+\item We can use author filter to view the commits
+\begin{lstlisting}
+git log --author="Aditya"
+\end{lstlisting}
+The author can be matched on partial string but is case sensitive
+\item To filter by words in the commit message
+\begin{lstlisting}
+git log --grep="regexp"
+\end{lstlisting}
+\item To check the commits from ``HEAD'' going backwards.
+\begin{lstlisting}
+git log HEAD
+\end{lstlisting}
+\end{enumerate}
+
+\section*{Managing repositories}
+\begin{enumerate}
+\item To check the status of the current branch
+\begin{lstlisting}
+git status
+\end{lstlisting}
+It gives the difference between the working directory, staging index and git repository.
+\item To see the differences between the repository and working directory, file by file
+\begin{lstlisting}
+git diff filename<optional>
+\end{lstlisting}
+\item To view the differences between the git repository and staging index, file by file
+\begin{lstlisting}
+git diff --staged
+\end{lstlisting}
+\item To view changes side by side
+\begin{lstlisting}
+git diff --color-words filename
+\end{lstlisting}
+\item Undo changes in the working directory
+\begin{lstlisting}
+git checkout -- filename
+\end{lstlisting}
+This will checkout the the files from the repository at the current branch to the working directory.
 \end{enumerate}
 
 \end{document}
