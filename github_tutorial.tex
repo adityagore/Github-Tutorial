@@ -201,9 +201,34 @@ git log --grep="regexp"
 \begin{lstlisting}
 git log HEAD
 \end{lstlisting}
+\item Useful options to use with git log
+\begin{lstlisting}
+git log --oneline
+git log --oneline -3 (previous 3 commits)
+git log --oneline HEAD~3..HEAD~1
+git log HEAD~10.. filename (to see all the commits made for that file)
+git log -p HEAD~10.. filename (to see the changes to the file)
+git log --stat --summary
+git log --format=oneline
+git log --format=short
+git log --format=full
+git log --format=fuller
+git log --format=email
+git log --graph
+git log --oneline --graph --all --decorate
+\end{lstlisting}
+\item To see the changes from a previous commit
+\begin{lstlisting}
+git show HEAD~2
+\end{lstlisting}
+\item To compare the commits
+\begin{lstlisting}
+git diff HEAD~2 filename
+git diff HEAD~3..HEAD~1 filename
+\end{lstlisting}
 \end{enumerate}
 
-\section*{Managing repositories}
+\section*{Managing repositories/commits}
 \begin{enumerate}
 \item To check the status of the current branch
 \begin{lstlisting}
@@ -227,6 +252,57 @@ git diff --color-words filename
 git checkout -- filename
 \end{lstlisting}
 This will checkout the the files from the repository at the current branch to the working directory.
+\item Undo changes in the staging index
+\begin{lstlisting}
+git reset HEAD filename
+\end{lstlisting}
+This will remove the file from staging index but would not modify the file in the working directory. If filename is not provided then it will remove all the files from the staging index without modifying the files in the working directory.
+\item To amend the commit (can only change the most recent commit)
+\begin{lstlisting}
+git add filename
+git commit --amend -m "write the message from the recent commit"
+\end{lstlisting}
+This changes the most recent commit (the one that HEAD points to)
+\item To revert changes made to a file to an older commit
+\begin{lstlisting}
+git checkout 2afd5fd3b0 -- filename
+git commit -m "Revert the changes to an older commit"
+\end{lstlisting}
+2afd5fd3b0 is the SHA for the commit where you want to revert to. The first command will checkout the file in the staging index.
+\item To revert to the changes in one single step
+\begin{lstlisting}
+git revert 2afd5fd3b0
+\end{lstlisting}
+\item Another way to undo a commit.
+\begin{lstlisting}
+git reset --soft 2afd5fd3b0 
+\end{lstlisting}
+The $--$soft option just moves the HEAD pointer to the repository. The staging index and the working directory remains unchanged.\\
+The $--$mixed option moves the HEAD pointer to the repository and also modifies the staging index to reflect the repository. It does not change the working directory.\\
+The $--$hard option moves the HEAD pointer to the repository and makes the changes to the staging index and working directory to reflect the repository.
+\item Removing untracked files
+\begin{lstlisting}
+git clean -n
+git clean -f
+\end{lstlisting}
+-n tells you what it would do.
+-f forces the command to remove the untracked files.
+\item To ignore tracked files
+\begin{lstlisting}
+git rm --cached filename
+\end{lstlisting}
+First remove it from the staging index. Then add the filename to the .gitignore file.
+\item To track an empty directory
+Add a file called .gitkeep
+\end{enumerate}
+
+\section*{Referencing commits}
+\begin{enumerate}
+\item To see the the tree-ish structure of commit
+\begin{lstlisting}
+git ls-tree HEAD~2
+\end{lstlisting}
+This will show you the list of files in grand parent (second parent) of the commit where HEAD is pointing at.
 \end{enumerate}
 
 \end{document}
