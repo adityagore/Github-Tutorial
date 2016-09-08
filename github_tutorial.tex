@@ -128,6 +128,14 @@ git config --global color.ui true
 \begin{lstlisting}
 git config --list
 \end{lstlisting}
+\item To view the display format
+\begin{lstlisting}
+echo $PS1
+\end{lstlisting}
+\item To add keyboard shortcuts
+\begin{lstlisting}
+git config --global alias.<shortcut> <command>
+\end{lstlisting}
 \end{enumerate}
 
 \section*{Create Repository w/o Github}
@@ -226,6 +234,11 @@ git show HEAD~2
 git diff HEAD~2 filename
 git diff HEAD~3..HEAD~1 filename
 \end{lstlisting}
+\item To compare branches
+\begin{lstlisting}
+git diff branchname1.commitname..branchane2.commitname
+\end{lstlisting}
+commitname is optional
 \end{enumerate}
 
 \section*{Managing repositories/commits}
@@ -303,6 +316,125 @@ Add a file called .gitkeep
 git ls-tree HEAD~2
 \end{lstlisting}
 This will show you the list of files in grand parent (second parent) of the commit where HEAD is pointing at.
+\item To check if one branch is completely contained in other branch
+\begin{lstlisting}
+git branch --merged
+\end{lstlisting}
+This will show the a list of branches that contains the same commits as the current branch.
+\end{enumerate}
+
+\section*{Creating and Managing Branches}
+\begin{enumerate}
+\item To view the current branch
+\begin{lstlisting}
+git branch
+\end{lstlisting}
+\item To create a new branch
+\begin{lstlisting}
+git branch branchname
+\end{lstlisting}
+Just creates a new branch but does not switch to it.
+\item To switch to a branch
+\begin{lstlisting}
+git checkout branchname
+\end{lstlisting}
+\item To create and switch to branch
+\begin{lstlisting}
+git checkout -b branchname
+\end{lstlisting}
+\item To rename a branch
+\begin{lstlisting}
+git branch -m old_branchname new_branchname
+\end{lstlisting}
+\item To delete branch
+\begin{lstlisting}
+git branch -d branchname
+\end{lstlisting}
+Will delete branch if it is not current or if there are no children, unless all the children commits are merged into current branch.
+\item To merge two branches
+\begin{lstlisting}
+git checkout branchname1
+git merge branchname2
+\end{lstlisting}
+This will merge branchname2 into branchname1
+\item To abort a conflicting merge
+\begin{lstlisting}
+git merge --abort
+\end{lstlisting}
+\item To switch branches before commiting the changes
+\begin{lstlisting}
+git stash save "write the message here"
+\end{lstlisting}
+\item To vew the stash
+\begin{lstlisting}
+git stash list
+\end{lstlisting}
+\item To see the modifications in the stash
+\begin{lstlisting}
+git stash show -p stashname
+\end{lstlisting}
+\item To retrieve the file from stash
+\begin{lstlisting}
+git stash apply stashname
+git stash pop stashname
+\end{lstlisting}
+apply command just retrieves whereas pop command retrieves and deletes the file from stash
+\item To delete item from the stash
+\begin{lstlisting}
+git stash drop stashname
+\end{lstlisting}
+\item To delete all the items from the stash
+\begin{lstlisting}
+git stash clear
+\end{lstlisting}
+\end{enumerate}
+
+\section*{Working with remote repositories}
+\begin{enumerate}
+\item To see the remote repository
+\begin{lstlisting}
+git remote
+\end{lstlisting}
+\item To add a remote to current local repository
+\begin{lstlisting}
+git remote add <alias> <url>
+\end{lstlisting}
+\item To get more information about the remote
+\begin{lstlisting}
+git remote -v
+\end{lstlisting}
+\item To push a branch to a remote repository
+\begin{lstlisting}
+git push -u <remote> <branch>
+\end{lstlisting}
+The -u options is to make sure that the remote repository is tracked.
+\item To start tracking a non tracking branch
+\begin{lstlisting}
+git branch --set-upstream <branch> <remote>/<branch>
+\end{lstlisting}
+\item To sync a local copy of remote repository
+\begin{lstlisting}
+git fetch <remote> <branch>
+\end{lstlisting}
+\item To merge the local copy of remote repository with local branch
+\begin{lstlisting}
+git merge <remote>/<branch>
+\end{lstlisting}
+\item To sync and merge the local copy of remote repository with local branch
+\begin{lstlisting}
+git pull
+\end{lstlisting}
+\item To checkout a branch from a local copy of remote repository
+\begin{lstlisting}
+git branch <branch> <remote>/<branch>
+\end{lstlisting}
+\item To delete a remote branch
+\begin{lstlisting}
+git push <remote> :<branch>
+git push --delete <branch>
+\end{lstlisting}
+
+
 \end{enumerate}
 
 \end{document}
