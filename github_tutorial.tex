@@ -170,11 +170,11 @@ git commit -m "Write down the message about the commit"
 \end{lstlisting}
 \item To remove a deleted file (working directory) from the repository
 \begin{lstlisting}
-git rm file_name
+git rm <file>
 \end{lstlisting}
 \item To move or rename a file
 \begin{lstlisting}
-git mv firstname secondname
+git mv <file1> <file2>
 \end{lstlisting}
 \item To add and commit at the same time
 \begin{lstlisting}
@@ -203,7 +203,7 @@ git log --author="Aditya"
 The author can be matched on partial string but is case sensitive
 \item To filter by words in the commit message
 \begin{lstlisting}
-git log --grep="regexp"
+git log --grep=<regex>
 \end{lstlisting}
 \item To check the commits from ``HEAD'' going backwards.
 \begin{lstlisting}
@@ -231,12 +231,12 @@ git show HEAD~2
 \end{lstlisting}
 \item To compare the commits
 \begin{lstlisting}
-git diff HEAD~2 filename
-git diff HEAD~3..HEAD~1 filename
+git diff HEAD~2 <file>
+git diff HEAD~3..HEAD~1 <file>
 \end{lstlisting}
 \item To compare branches
 \begin{lstlisting}
-git diff branchname1.commitname..branchane2.commitname
+git diff <branch>.<commit>..<branch>.<commit>
 \end{lstlisting}
 commitname is optional
 \end{enumerate}
@@ -250,7 +250,7 @@ git status
 It gives the difference between the working directory, staging index and git repository.
 \item To see the differences between the repository and working directory, file by file
 \begin{lstlisting}
-git diff filename<optional>
+git diff <file><optional>
 \end{lstlisting}
 \item To view the differences between the git repository and staging index, file by file
 \begin{lstlisting}
@@ -258,37 +258,37 @@ git diff --staged
 \end{lstlisting}
 \item To view changes side by side
 \begin{lstlisting}
-git diff --color-words filename
+git diff --color-words <file>
 \end{lstlisting}
 \item Undo changes in the working directory
 \begin{lstlisting}
-git checkout -- filename
+git checkout -- <file>
 \end{lstlisting}
 This will checkout the the files from the repository at the current branch to the working directory.
 \item Undo changes in the staging index
 \begin{lstlisting}
-git reset HEAD filename
+git reset HEAD <file>
 \end{lstlisting}
 This will remove the file from staging index but would not modify the file in the working directory. If filename is not provided then it will remove all the files from the staging index without modifying the files in the working directory.
 \item To amend the commit (can only change the most recent commit)
 \begin{lstlisting}
-git add filename
+git add <file>
 git commit --amend -m "write the message from the recent commit"
 \end{lstlisting}
 This changes the most recent commit (the one that HEAD points to)
 \item To revert changes made to a file to an older commit
 \begin{lstlisting}
-git checkout 2afd5fd3b0 -- filename
+git checkout <commit> -- <file>
 git commit -m "Revert the changes to an older commit"
 \end{lstlisting}
 2afd5fd3b0 is the SHA for the commit where you want to revert to. The first command will checkout the file in the staging index.
 \item To revert to the changes in one single step
 \begin{lstlisting}
-git revert 2afd5fd3b0
+git revert <commit>
 \end{lstlisting}
 \item Another way to undo a commit.
 \begin{lstlisting}
-git reset --soft 2afd5fd3b0 
+git reset --soft <commit> 
 \end{lstlisting}
 The $--$soft option just moves the HEAD pointer to the repository. The staging index and the working directory remains unchanged.\\
 The $--$mixed option moves the HEAD pointer to the repository and also modifies the staging index to reflect the repository. It does not change the working directory.\\
@@ -302,7 +302,7 @@ git clean -f
 -f forces the command to remove the untracked files.
 \item To ignore tracked files
 \begin{lstlisting}
-git rm --cached filename
+git rm --cached <file>
 \end{lstlisting}
 First remove it from the staging index. Then add the filename to the .gitignore file.
 \item To track an empty directory
@@ -331,32 +331,32 @@ git branch
 \end{lstlisting}
 \item To create a new branch
 \begin{lstlisting}
-git branch branchname
+git branch <branch>
 \end{lstlisting}
 Just creates a new branch but does not switch to it.
 \item To switch to a branch
 \begin{lstlisting}
-git checkout branchname
+git checkout <branch>
 \end{lstlisting}
 \item To create and switch to branch
 \begin{lstlisting}
-git checkout -b branchname
+git checkout -b <branch>
 \end{lstlisting}
 \item To rename a branch
 \begin{lstlisting}
-git branch -m old_branchname new_branchname
+git branch -m <branch1> <branch2>
 \end{lstlisting}
 \item To delete branch
 \begin{lstlisting}
-git branch -d branchname
+git branch -d <branch>
 \end{lstlisting}
 Will delete branch if it is not current or if there are no children, unless all the children commits are merged into current branch.
 \item To merge two branches
 \begin{lstlisting}
-git checkout branchname1
-git merge branchname2
+git checkout <branch1>
+git merge <branch2>
 \end{lstlisting}
-This will merge branchname2 into branchname1
+This will merge branch2 into branch1
 \item To abort a conflicting merge
 \begin{lstlisting}
 git merge --abort
@@ -371,17 +371,17 @@ git stash list
 \end{lstlisting}
 \item To see the modifications in the stash
 \begin{lstlisting}
-git stash show -p stashname
+git stash show -p <stash>
 \end{lstlisting}
 \item To retrieve the file from stash
 \begin{lstlisting}
-git stash apply stashname
-git stash pop stashname
+git stash apply <stash>
+git stash pop <stash>
 \end{lstlisting}
 apply command just retrieves whereas pop command retrieves and deletes the file from stash
 \item To delete item from the stash
 \begin{lstlisting}
-git stash drop stashname
+git stash drop <stash>
 \end{lstlisting}
 \item To delete all the items from the stash
 \begin{lstlisting}
